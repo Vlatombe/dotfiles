@@ -38,7 +38,7 @@ export CASE_SENSITIVE="false"
 # export DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
-plugins=(git battery brew osx gradle ant compleat dirpersist gem cloudapp ruby textmate sublime atom)
+plugins=(git battery brew osx gradle ant compleat dirpersist gem ruby atom)
 
 source $ZSH/oh-my-zsh.sh
 
