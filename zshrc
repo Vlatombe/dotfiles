@@ -38,18 +38,13 @@ export CASE_SENSITIVE="false"
 # export DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
-plugins=(git battery brew osx gradle ant compleat dirpersist gem ruby atom)
+plugins=(git ssh-agent gpg-agent battery brew osx gradle ant compleat dirpersist gem ruby atom chucknorris)
 
 source $ZSH/oh-my-zsh.sh
 
-##############################################################################
-# Boxen setup
-##############################################################################
-#source /opt/boxen/env.sh
 bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
 
-### Added by the Heroku Toolbelt
-#export PATH="/usr/local/heroku/bin:$PATH"
+# Jenv
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"

@@ -11,8 +11,3 @@ export MAVEN_OPTS=-Djava.awt.headless=true
 #export PAGER="less"
 # Set less to have a default flag of -R (RAW) so color passes through
 #export LESS="-R"
-
-gpg-agent -q -s --use-standard-socket --daemon --write-env-file ~/.gpg-agent.rc > /dev/null
-. ~/.gpg-agent.rc
-GPG_TTY=$(tty)
-export GPG_TTY GPG_AGENT_INFO
