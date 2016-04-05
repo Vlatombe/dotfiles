@@ -38,7 +38,7 @@ export CASE_SENSITIVE="false"
 # export DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
-plugins=(git ssh-agent gpg-agent battery brew osx gradle ant compleat dirpersist gem ruby atom chucknorris)
+plugins=(git ssh-agent gpg-agent battery brew osx gradle ant compleat dirpersist gem ruby atom chucknorris z)
 
 source $ZSH/oh-my-zsh.sh
 
