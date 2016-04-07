@@ -2,6 +2,7 @@
 	name = Vincent Latombe
 	email = vincent@latombe.net
 	username = vlatombe
+	signingkey = 4A24D927
 
 [color]
 # ui = true is a superset of all the more specific color options
