@@ -195,6 +195,7 @@
 	prompt = false
 [diff]
 	tool = p4mergetool
+	compactionHeuristic = true
 #	renames = true
 
 [mergetool]
