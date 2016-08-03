@@ -48,7 +48,6 @@ PATH=$PATH:/usr/local/share/npm/bin
 
 # PSE
 PATH=$PATH:~/Projects/Cloudbees/dna/scripts
-PATH=$PATH:~/terraform_0.6.16_darwin_amd64
 PATH=$PATH:~/packer_0.8.5_darwin_amd64
 PATH=$PATH:~/Projects/Cloudbees/tiger/containers/cli
 PATH=$PATH:~/Projects/Cloudbees/tiger/cli/scripts
