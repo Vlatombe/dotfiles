@@ -54,7 +54,7 @@ PATH=$PATH:~/Projects/Cloudbees/tiger/containers/cli
 PATH=$PATH:~/Projects/Cloudbees/tiger/cli/scripts
 
 # DNA
-PYTHONPATH=~/Projects/Cloudbees/dna
+export PYTHONPATH=~/Projects/Cloudbees/dna
 
 #Secrets
 PATH=$PATH:~/Projects/Secrets/secrets-api/bin
