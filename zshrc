@@ -49,3 +49,9 @@ bindkey '^[[F' end-of-line
 export PATH="$HOME/.jenv/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 eval "$(jenv init -)"
+
+# Source chtf
+if [[ -f /usr/local/share/chtf/chtf.sh ]]; then
+    source "/usr/local/share/chtf/chtf.sh"
+fi
+chtf 0.7.1
