@@ -39,6 +39,7 @@ export MANPATH=$MANPATH:/opt/local/share/man
 #export PATH=~/.gem/ruby/1.8/bin:$PATH             #For showoff
 #export PATH=$PATH:~/.cljr/bin
 export PATH=~/.rbenv/bin:$PATH
+export PATH=~/.shinobi/bin:$PATH
 
 # Git Tools
 PATH=$PATH:/Applications/Dev/jgit

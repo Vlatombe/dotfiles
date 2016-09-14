@@ -19,3 +19,12 @@ setopt    incappendhistory  #Immediately append to the history file, not just wh
 ##############################################################################
 source ~/.dotfiles/z-rupa/z.sh
 
+zd() {
+  local args=( "${@}" )
+  if (( ${#args[@]} > 0 )) ; then
+    command cbsupport-case "$@"
+    cd "$CB_SUPPORT_HOME/cases/$1"
+  else
+    cd "$CB_SUPPORT_HOME/cases"
+  fi
+}
