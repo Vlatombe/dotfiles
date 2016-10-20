@@ -54,4 +54,4 @@ eval "$(jenv init -)"
 if [[ -f /usr/local/share/chtf/chtf.sh ]]; then
     source "/usr/local/share/chtf/chtf.sh"
 fi
-chtf 0.7.3
+chtf 0.7.6
