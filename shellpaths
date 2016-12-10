@@ -49,11 +49,10 @@ PATH=$PATH:/usr/local/share/npm/bin
 
 # PSE
 PATH=$PATH:~/Projects/Cloudbees/dna/scripts
-PATH=$PATH:~/Projects/Cloudbees/tiger/containers/cli
 PATH=$PATH:~/Projects/Cloudbees/tiger/cli/scripts
 
-# DNA
-export PYTHONPATH=~/Projects/Cloudbees/dna
+# OPS
+PATH=$PATH:~/Projects/Cloudbees/devops-ninja-tools/bin/aws
 
 #Secrets
 PATH=$PATH:~/Projects/Secrets/secrets-api/bin
