@@ -56,6 +56,7 @@ symlinkifne .shellactivities
 symlinkifne .shellaliases
 symlinkifne .shellpaths
 symlinkifne .shellvars
+symlinkifne .shinobi-config
 symlinkifne .slate
 symlinkifne .vimrc
 symlinkifne .zlogout

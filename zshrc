@@ -55,3 +55,8 @@ if [[ -f /usr/local/share/chtf/chtf.sh ]]; then
     source "/usr/local/share/chtf/chtf.sh"
 fi
 chtf 0.7.6
+
+source ~/.shinobi-config
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+source ~/Projects/Cloudbees/support-shinobi-tools/lib/shinobi_bash_completion.sh
