@@ -194,7 +194,7 @@
 [difftool]
 	prompt = false
 [diff]
-	tool = p4mergetool
+	tool = bc3
 	compactionHeuristic = true
 #	renames = true
 
@@ -202,7 +202,7 @@
 	prompt = false
 	keepBackup = false
 [merge]
-	tool = p4mergetool
+	tool = bc3
 
 [branch]
     # Automatically set up pull to be --rebase
@@ -265,6 +265,7 @@ protocol = https
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -273,5 +274,7 @@ protocol = https
 	trustExitCode = false
 [difftool "p4mergetool"]
 	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE
+[mergetool "bc3"]
+	trustExitCode = true
 [commit]
 	gpgsign = true

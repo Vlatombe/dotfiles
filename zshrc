@@ -60,3 +60,4 @@ source ~/.shinobi-config
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 source ~/Projects/Cloudbees/support-shinobi-tools/lib/shinobi_bash_completion.sh
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
