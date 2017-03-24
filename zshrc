@@ -17,6 +17,8 @@ export ZSH=$HOME/.dotfiles/oh-my-zsh
 #export ZSH_THEME="candy-kingdom"
 #export ZSH_THEME="cloud"
 export ZSH_THEME="crunch"
+#export ZSH_THEME="intheloop"
+#export ZSH_THEME="strug"
 #export ZSH_THEME="eastwood"
 #export ZSH_THEME="dpoggi"
 #export ZSH_THEME="gozilla"
@@ -38,7 +40,7 @@ export CASE_SENSITIVE="false"
 # export DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
-plugins=(git git-prompt ssh-agent gpg-agent battery brew osx gradle ant compleat dirpersist gem ruby atom chucknorris z docker terraform mvn)
+plugins=(git git-prompt github ssh-agent gpg-agent battery brew osx gradle ant compleat dirpersist gem ruby atom chucknorris z docker terraform mvn)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -54,7 +56,7 @@ eval "$(jenv init -)"
 if [[ -f /usr/local/share/chtf/chtf.sh ]]; then
     source "/usr/local/share/chtf/chtf.sh"
 fi
-chtf 0.8.1
+chtf 0.8.8
 
 source ~/.shinobi-config
 autoload -U +X compinit && compinit
