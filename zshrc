@@ -56,7 +56,7 @@ eval "$(jenv init -)"
 if [[ -f /usr/local/share/chtf/chtf.sh ]]; then
     source "/usr/local/share/chtf/chtf.sh"
 fi
-chtf 0.9.6
+chtf 0.9.11
 
 source ~/.shinobi-config
 autoload -U +X compinit && compinit
