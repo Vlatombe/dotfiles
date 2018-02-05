@@ -36,3 +36,6 @@ PATH=$PATH:~/Projects/Cloudbees/devops-ninja-tools/bin/aws
 
 #Secrets
 PATH=$PATH:~/Projects/Secrets/secrets-api/bin
+
+# GO
+export PATH=$PATH:$GOPATH/bin 
