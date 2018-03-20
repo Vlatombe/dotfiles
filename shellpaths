@@ -39,3 +39,6 @@ PATH=$PATH:~/Projects/Secrets/secrets-api/bin
 
 # GO
 export PATH=$PATH:$GOPATH/bin 
+
+# Python 2
+export PATH="/usr/local/opt/python@2/bin:$PATH"
