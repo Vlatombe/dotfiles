@@ -40,7 +40,27 @@ export CASE_SENSITIVE="false"
 # export DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
-plugins=(git git-prompt github ssh-agent gpg-agent battery brew osx gradle ant compleat dirpersist gem ruby atom chucknorris z docker terraform mvn)
+plugins=( \
+          ant \
+          atom \
+          chucknorris \
+          compleat \
+          dirpersist \
+          docker \
+          gpg-agent \
+          git \
+          git-prompt \
+          github \
+          gradle \
+          helm \
+          kops \
+          kube-ps1\
+          mvn \
+          osx \
+          ssh-agent \
+          terraform \
+          z \
+          )
 
 source $ZSH/oh-my-zsh.sh
 
@@ -56,12 +76,12 @@ eval "$(jenv init -)"
 if [[ -f /usr/local/share/chtf/chtf.sh ]]; then
     source "/usr/local/share/chtf/chtf.sh"
 fi
-chtf 0.11.2
+chtf 0.11.4
 
-source ~/.shinobi-config
-autoload -U +X compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
-source ~/Projects/Cloudbees/support-shinobi-tools/lib/shinobi_bash_completion.sh
+#source ~/.shinobi-config
+#autoload -U +X compinit && compinit
+#autoload -U +X bashcompinit && bashcompinit
+#source ~/Projects/Cloudbees/support-shinobi-tools/lib/shinobi_bash_completion.sh
+
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-source <(kubectl completion zsh)
-source <(kops completion zsh)
+chuck
