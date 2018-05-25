@@ -10,22 +10,7 @@ export ZSH=$HOME/.dotfiles/oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 
-#export ZSH_THEME="af-magic"
-#export ZSH_THEME="amuse"
-#export ZSH_THEME="awesomepanda"
-#export ZSH_THEME="bira"
-#export ZSH_THEME="candy-kingdom"
-#export ZSH_THEME="cloud"
 export ZSH_THEME="crunch"
-#export ZSH_THEME="intheloop"
-#export ZSH_THEME="strug"
-#export ZSH_THEME="eastwood"
-#export ZSH_THEME="dpoggi"
-#export ZSH_THEME="gozilla"
-#export ZSH_THEME="fino"
-#export ZSH_THEME="takashiyoshida"
-#export ZSH_THEME="random"
-#export ZSH_THEME="jnrowe"
 
 # Set to this to use case-sensitive completion
 export CASE_SENSITIVE="false"
@@ -54,6 +39,7 @@ plugins=( \
           gradle \
           helm \
           kops \
+          kubectl \
           kube-ps1\
           mvn \
           osx \
@@ -84,4 +70,4 @@ chtf 0.11.4
 #source ~/Projects/Cloudbees/support-shinobi-tools/lib/shinobi_bash_completion.sh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-chuck
+#chuck

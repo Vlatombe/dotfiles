@@ -55,6 +55,9 @@ alias to.devapps='cd ${MYDEVAPPS}'
 alias aq=aquamacs
 alias g=git
 
+# Kubens / Kubectx
+alias kns=kubens
+alias kx=kubectx
 
 #############################
 # Utilities
