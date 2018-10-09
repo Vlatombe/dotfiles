@@ -59,6 +59,8 @@ alias g=git
 alias kns=kubens
 alias kx=kubectx
 
+alias cb=cloudbees
+
 #############################
 # Utilities
 alias zipall='for D in *; do zip -r "$D" "$D"; done'
@@ -76,6 +78,8 @@ alias timemachine.enablelocalversions='sudo tmutil enablelocal'
 alias timemachine.disablelocalversions='sudo tmutil disablelocal'
 
 alias hexdumpfile='od -h'
+
+alias aws.refresh='opscore iam refresh --account cloudbees-pse --role infra-admin'
 
 # Flush the DNS on Mac
 alias network.dnsflush='dscacheutil -flushcache'

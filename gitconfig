@@ -203,6 +203,8 @@
 	keepBackup = false
 [merge]
 	tool = bc3
+[rebase]
+  autoStash = true
 
 [branch]
     # Automatically set up pull to be --rebase

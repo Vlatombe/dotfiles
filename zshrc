@@ -54,15 +54,21 @@ bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
 
 # Jenv
-export PATH="$HOME/.jenv/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 
 # Source chtf
 if [[ -f /usr/local/share/chtf/chtf.sh ]]; then
     source "/usr/local/share/chtf/chtf.sh"
 fi
-chtf 0.11.4
+chtf 0.11.2
+
+# Source checks
+if [[ -f /usr/local/opt/chk/share/chk/chk.sh ]]; then
+    source "/usr/local/opt/chk/share/chk/chk.sh"
+fi
+chk 1.10.3
 
 #source ~/.shinobi-config
 #autoload -U +X compinit && compinit

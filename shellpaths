@@ -41,4 +41,5 @@ PATH=$PATH:~/Projects/Secrets/secrets-api/bin
 export PATH=$PATH:$GOPATH/bin 
 
 # Python 2
+export PATH="/Users/vincent/Library/Python/2.7/bin:$PATH"
 export PATH="/usr/local/opt/python@2/bin:$PATH"
