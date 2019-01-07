@@ -3,23 +3,23 @@
 ########################################################################
 
 # My Scripts
-export PATH=$PATH:.
-export PATH=$PATH:~/bin
-export PATH=$PATH:~/.dotfiles/scripts
+PATH=$PATH:.
+PATH=$PATH:~/bin
+PATH=$PATH:~/.dotfiles/scripts
 
 # Brew
-export PATH=/opt/boxen/homebrew/sbin:$PATH
-#export PATH=/opt/boxen/homebrew/bin:$PATH
+PATH=/opt/boxen/homebrew/sbin:$PATH
+#PATH=/opt/boxen/homebrew/bin:$PATH
 
 # MacPorts
 ## Having MacPorts first instead of after $PATH causes a GitK error
 ## http://stackoverflow.com/questions/2629292/starting-gitk-error
-export PATH=$PATH:/opt/local/bin
-export PATH=$PATH:/opt/local/sbin
+PATH=$PATH:/opt/local/bin
+PATH=$PATH:/opt/local/sbin
 export MANPATH=$MANPATH:/opt/local/share/man
 
 # Dev
-export PATH=~/.rbenv/bin:$PATH
+PATH=~/.rbenv/bin:$PATH
 
 # Git Tools
 PATH=$PATH:/Applications/Dev/jgit
@@ -29,7 +29,7 @@ PATH=$PATH:/usr/local/share/npm/bin
 
 # PSE
 PATH=$PATH:~/Projects/Cloudbees/dna/scripts
-PATH=$PATH:~/Projects/Cloudbees/tiger/cli/scripts
+PATH=$PATH:~/Projects/Cloudbees/cloud-platform-v1/cli/scripts
 
 # OPS
 PATH=$PATH:~/Projects/Cloudbees/devops-ninja-tools/bin/aws
@@ -38,8 +38,12 @@ PATH=$PATH:~/Projects/Cloudbees/devops-ninja-tools/bin/aws
 PATH=$PATH:~/Projects/Secrets/secrets-api/bin
 
 # GO
-export PATH=$PATH:$GOPATH/bin 
+PATH=$PATH:$GOPATH/bin
+#PATH=/usr/local/go/bin:$PATH
+PATH=~/bin/helm-2.11:$PATH
 
 # Python 2
-export PATH="/Users/vincent/Library/Python/2.7/bin:$PATH"
-export PATH="/usr/local/opt/python@2/bin:$PATH"
+PATH="/Users/vincent/Library/Python/2.7/bin:$PATH"
+PATH="/usr/local/opt/python@2/bin:$PATH"
+
+export PATH
