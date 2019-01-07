@@ -35,7 +35,6 @@ plugins=( \
           gpg-agent \
           git \
           git-prompt \
-          github \
           gradle \
           helm \
           kops \
@@ -64,16 +63,16 @@ if [[ -f /usr/local/share/chtf/chtf.sh ]]; then
 fi
 chtf 0.11.2
 
-# Source checks
+# Source kubectl switcher
 if [[ -f /usr/local/opt/chk/share/chk/chk.sh ]]; then
     source "/usr/local/opt/chk/share/chk/chk.sh"
 fi
-chk 1.10.3
+chk 1.11.5
 
-#source ~/.shinobi-config
-#autoload -U +X compinit && compinit
-#autoload -U +X bashcompinit && bashcompinit
-#source ~/Projects/Cloudbees/support-shinobi-tools/lib/shinobi_bash_completion.sh
+source ~/.shinobi-config
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+source ~/Projects/Cloudbees/support-shinobi-tools/lib/shinobi_bash_completion.sh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 #chuck
