@@ -243,6 +243,9 @@
 [http]
 	# proxy=http://something
 
+[checkout]
+	# Prefer origin if ambiguity when checking out a remote branch
+	defaultRemote = origin
 [hub]
 	protocol = https
 [gist]
