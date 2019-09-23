@@ -224,9 +224,9 @@
 [url "git@github.com:vlatombe/"]
 	insteadOf = "ghsm://"
 	pushInsteadOf = "ghsm://"
-[url "git@github.com:"]
-	insteadOf = "https://github.com/"
-	pushInsteadOf = "https://github.com/"
+[url "https://github.com/"]
+	insteadOf = "git@github.com:"
+	pushInsteadOf = "git@github.com:"
 [url "https://github.com/"]
 	insteadOf = "ghh://"
 	pushInsteadOf = "ghh://"
