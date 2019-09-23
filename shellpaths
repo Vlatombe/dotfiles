@@ -40,7 +40,6 @@ PATH=$PATH:~/Projects/Secrets/secrets-api/bin
 # GO
 PATH=$PATH:$GOPATH/bin
 #PATH=/usr/local/go/bin:$PATH
-PATH=~/bin/helm-2.11:$PATH
 
 # Python 2
 PATH="/Users/vincent/Library/Python/2.7/bin:$PATH"

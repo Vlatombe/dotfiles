@@ -144,3 +144,4 @@ function screenshot.setpng() {
 }
 
 alias gfd='bosh -n create release --force && bosh -n upload release && bosh -n deploy --recreate'
+alias ecr-login-gauntlet='opscore ecr login --account cloudbees-gauntlet --role infra-ecr-reader'
