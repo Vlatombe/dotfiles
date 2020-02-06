@@ -41,8 +41,10 @@
 
 [alias]
 	amend = commit --amend
+	b = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:red)%(objectname:short)%(color:reset) - %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) (%(color:green)%(committerdate:relative))'
 	br = branch -a
-	s = status -u -s
+	s = status
+	st = status
 	cl = log --stat -C -2
 	c = commit
 	co = checkout
@@ -63,8 +65,6 @@
 	l1 = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
 	l2 = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	l3 = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	spull = !git-svn fetch && git-svn rebase
-	spush = !git-svn dcommit
 	sync = !git pull && git push
 	es = !git pull --rebase && git push
 	lf = log --pretty=fuller
@@ -80,7 +80,6 @@
 	logr2 = log --stat -M -2
 	logit = log --stat -M
 	scrub = !git reset --hard && git clean -fd
-  pubdev = !git pub checkout master && git pull && git checkout dev && git rebase master && git checkout master && git merge dev && git wtf
 	pub = push -u origin
 	cs = status
 	re = remote -v
@@ -94,7 +93,6 @@
 	# te1 RESULT: with slash: zero=- one=A two=B
 	testecho2 = !sh -c 'echo without slash: zero=$0 one=$1 two=$2'
 	# te2 RESULT: without slash: zero=A one=B two=C
-	st = status
 	l = log --stat -C
 	ll = log --stat -C -3
 	servehere = daemon --verbose --informative-errors --reuseaddr --export-all --base-path=. --enable=receive-pack
@@ -147,19 +145,6 @@
 	rlog = log --color-words --stat -3
 	lm = log --stat -M
 
-	# Legit
-	legitsync = !legit sync \"$@\"
-	legitswitch = !legit switch \"$@\"
-	legitbranches = !legit branches
-	legitsprout = !legit sprout \"$@\"
-	legitunpublish = !legit unpublish \"$@\"
-	legitharvest = !legit harvest \"$@\"
-	legitpublish = !legit publish \"$@\"
-	legitgraft = !legit graft \"$@\"
-
-	#Searches
-	findjuniodeletes = log --author=Junio --diff-filter=D --since=2.years.ago
-
 	#https://git.wiki.kernel.org/index.php?title=Aliases
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
 	graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
@@ -177,8 +162,6 @@
 	cc-helperlin = "config --global credential.helper '/pathto/git-credential-gnome-key'"
 	logm = log --stat -M
 	logcpy = log --stat -1 -C -C
-	pushsvn = svn dcommit
-	pullsvn = svn rebase
 	nfjsunpushed = log origin/master..master --oneline
 	rtheirs = !git checkout --theirs ./ && git add . && git rebase --continue
 	logfive = log --graph --pretty=oneline --abbrev-commit --decorate --all -5
@@ -196,6 +179,7 @@
 [diff]
 	tool = bc3
 	compactionHeuristic = true
+	algorithm = patience
 #	renames = true
 
 [mergetool]

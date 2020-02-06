@@ -7,25 +7,17 @@ PATH=$PATH:.
 PATH=$PATH:~/bin
 PATH=$PATH:~/.dotfiles/scripts
 
-# Brew
-PATH=/opt/boxen/homebrew/sbin:$PATH
-#PATH=/opt/boxen/homebrew/bin:$PATH
-
-# MacPorts
-## Having MacPorts first instead of after $PATH causes a GitK error
-## http://stackoverflow.com/questions/2629292/starting-gitk-error
-PATH=$PATH:/opt/local/bin
-PATH=$PATH:/opt/local/sbin
-export MANPATH=$MANPATH:/opt/local/share/man
-
 # Dev
 PATH=~/.rbenv/bin:$PATH
+
+# Put GNU utils before Mac OS ones
+PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 
 # Git Tools
 PATH=$PATH:/Applications/Dev/jgit
 
-# Node JS Packages (from Brew Install of Node and NPM)
-PATH=$PATH:/usr/local/share/npm/bin
+# Krew
+PATH=${KREW_ROOT:-$HOME/.krew}/bin:$PATH
 
 # PSE
 PATH=$PATH:~/Projects/Cloudbees/dna/scripts

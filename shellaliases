@@ -21,6 +21,10 @@ alias g=git
 alias kns=kubens
 alias kx=kubectx
 
+# Helm
+alias h=helm
+alias h3=helm3
+
 # CloudBees
 alias cb=cloudbees
 
