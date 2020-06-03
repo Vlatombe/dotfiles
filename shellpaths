@@ -12,6 +12,8 @@ PATH=~/.rbenv/bin:$PATH
 
 # Put GNU utils before Mac OS ones
 PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
+PATH=/usr/local/opt/openssl@1.1/bin:$PATH
 
 # Git Tools
 PATH=$PATH:/Applications/Dev/jgit

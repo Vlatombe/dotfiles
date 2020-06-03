@@ -23,3 +23,4 @@ export CB_SUPPORT_HOME="$HOME/Cloudbees/Support"
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export EDITOR=vim
 export GOPATH=/Users/vincent/go
+export GROOVY_HOME=/usr/local/opt/groovy/libexec
