@@ -38,6 +38,7 @@
 
 [push]
 	default = current
+	rebase = true
 
 [alias]
 	amend = commit --amend
