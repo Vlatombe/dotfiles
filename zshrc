@@ -52,11 +52,6 @@ source $ZSH/oh-my-zsh.sh
 bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
 
-# Jenv
-export PATH="/usr/local/sbin:$PATH"
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
-
 # Source chtf
 if [[ -f /usr/local/share/chtf/chtf.sh ]]; then
     source "/usr/local/share/chtf/chtf.sh"
@@ -76,3 +71,7 @@ source ~/Projects/Cloudbees/support-shinobi-tools/lib/shinobi_bash_completion.sh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 #chuck
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="~/.sdkman"
+[[ -s "~/.sdkman/bin/sdkman-init.sh" ]] && source "~/.sdkman/bin/sdkman-init.sh"

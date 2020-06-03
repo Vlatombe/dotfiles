@@ -28,3 +28,7 @@ shopt -s cmdhist
 # source /opt/boxen/homebrew/Cellar/git/1.9.1/etc/bash_completion.d/git-prompt.sh
 # PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
 # GIT_PS1_SHOWDIRTYSTATE=true
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="~/.sdkman"
+[[ -s "~/.sdkman/bin/sdkman-init.sh" ]] && source "~/.sdkman/bin/sdkman-init.sh"
