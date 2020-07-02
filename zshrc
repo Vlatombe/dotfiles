@@ -62,7 +62,7 @@ chtf 0.11.2
 if [[ -f /usr/local/opt/chk/share/chk/chk.sh ]]; then
     source "/usr/local/opt/chk/share/chk/chk.sh"
 fi
-chk 1.14.6
+chk 1.17.8
 
 source ~/.shinobi-config
 autoload -U +X compinit && compinit
