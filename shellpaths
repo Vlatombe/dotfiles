@@ -2,6 +2,8 @@
 # Shell agnostic path setup
 ########################################################################
 
+PATH=/usr/local/sbin:$PATH
+
 # My Scripts
 PATH=$PATH:.
 PATH=$PATH:~/bin
@@ -37,6 +39,5 @@ PATH=$PATH:$GOPATH/bin
 
 # Python 2
 PATH="/Users/vincent/Library/Python/2.7/bin:$PATH"
-PATH="/usr/local/opt/python@2/bin:$PATH"
 
 export PATH
