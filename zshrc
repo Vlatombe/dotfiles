@@ -27,7 +27,6 @@ export CASE_SENSITIVE="false"
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
 plugins=( \
           ant \
-          atom \
           chucknorris \
           compleat \
           dirpersist \
@@ -70,7 +69,10 @@ autoload -U +X bashcompinit && bashcompinit
 source ~/Projects/Cloudbees/support-shinobi-tools/lib/shinobi_bash_completion.sh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-#chuck
+
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
