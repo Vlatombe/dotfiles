@@ -24,3 +24,6 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export EDITOR=vim
 export GOPATH=/Users/vincent/go
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
+
+export HELM_S3_REGION=us-east-1
+export AWS_REGION=us-east-1

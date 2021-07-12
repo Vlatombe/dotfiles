@@ -55,13 +55,12 @@ bindkey '^[[F' end-of-line
 if [[ -f /usr/local/share/chtf/chtf.sh ]]; then
     source "/usr/local/share/chtf/chtf.sh"
 fi
-chtf 0.11.2
+chtf 0.15.3
 
 # Source kubectl switcher
 if [[ -f /usr/local/opt/chk/share/chk/chk.sh ]]; then
     source "/usr/local/opt/chk/share/chk/chk.sh"
 fi
-chk 1.17.8
 
 source ~/.shinobi-config
 autoload -U +X compinit && compinit
@@ -70,9 +69,7 @@ source ~/Projects/Cloudbees/support-shinobi-tools/lib/shinobi_bash_completion.sh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-fi
+eval "$(pyenv init -)"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"

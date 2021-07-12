@@ -28,6 +28,10 @@ alias h3=helm3
 # CloudBees
 alias cb=cloudbees
 
+# AWS
+alias aws.clusters='export AWS_PROFILE=cloudbees-cloud-platform-clusters; opscore iam refresh --role infra-admin --account $AWS_PROFILE'
+alias aws.automation='export AWS_PROFILE=cloudbees-cloud-platform-cluster-automation; opscore iam refresh --role infra-admin --account $AWS_PROFILE'
+
 #############################
 # Utilities
 alias zipall='for D in *; do zip -r "$D" "$D"; done'
@@ -83,6 +87,8 @@ alias files.usage.user='sudo fs_usage -e -f filesystem|grep -v CACHE_HIT|grep -v
 alias ls='ls -G -h -p '
 alias ll='ls -l -G -h -p '
 
+alias incremental.version='gh pr checks | grep incrementals | rev | cut -d '/' -f 2 | rev'
+
 #########################################
 # Utility Functions
 
@@ -99,9 +105,12 @@ function matrix3() {
 echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $( printf "\U$(( $RANDOM % 500 ))" ) ;sleep 0.05; done|gawk '{c=$4; letter=$4;a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'
 }
 
-# Use Mac OSX Preview to open a man page in a more handsome format
-function manp() {
-  man -t $1 | open -f -a /Applications/Preview.app
+# Remap the key above tab from my US internal keyboard to backtick
+function remapUsInternationalKeyboard() {
+  hidutil property --set '{"UserKeyMapping":
+    [{"HIDKeyboardModifierMappingSrc":0x700000064,
+      "HIDKeyboardModifierMappingDst":0x700000035}]
+  }'
 }
 
 # Show normally hidden system and dotfile types of files
