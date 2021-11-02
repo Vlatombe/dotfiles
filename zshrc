@@ -44,6 +44,7 @@ plugins=( \
           ssh-agent \
           terraform \
           z \
+          zsh-completions \
           )
 
 source $ZSH/oh-my-zsh.sh
@@ -54,8 +55,8 @@ bindkey '^[[F' end-of-line
 # Source chtf
 if [[ -f /usr/local/share/chtf/chtf.sh ]]; then
     source "/usr/local/share/chtf/chtf.sh"
+    chtf 1.0.2
 fi
-chtf 0.15.3
 
 # Source kubectl switcher
 if [[ -f /usr/local/opt/chk/share/chk/chk.sh ]]; then

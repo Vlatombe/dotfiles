@@ -21,6 +21,9 @@ alias g=git
 alias kns=kubens
 alias kx=kubectx
 
+# Maven daemon
+alias m=mvnd
+
 # Helm
 alias h=helm
 alias h3=helm3
