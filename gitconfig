@@ -268,3 +268,5 @@ protocol = https
 	trustExitCode = true
 [commit]
 	gpgsign = true
+[secrets]
+	providers = opscore security run git-secrets-provider -q

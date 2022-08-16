@@ -28,3 +28,4 @@ zd() {
     cd "$CB_SUPPORT_HOME/cases"
   fi
 }
+eval "$(/opt/homebrew/bin/brew shellenv)"

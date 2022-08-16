@@ -63,14 +63,9 @@ if [[ -f /usr/local/opt/chk/share/chk/chk.sh ]]; then
     source "/usr/local/opt/chk/share/chk/chk.sh"
 fi
 
-source ~/.shinobi-config
-autoload -U +X compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
-source ~/Projects/Cloudbees/support-shinobi-tools/lib/shinobi_bash_completion.sh
+source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-eval "$(pyenv init -)"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
