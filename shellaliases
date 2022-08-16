@@ -67,6 +67,8 @@ alias finder.astext='xattr -wx com.apple.FinderInfo "54 45 58 54 21 52 63 68 00 
 alias gitscribe.gp='git scribe gen pdf && open output/book.pdf'
 alias gitscribe.gh='git scribe gen html && open output/book.html'
 
+alias fork='gh repo fork --remote --clone'
+
 # Show network connections
 # Often useful to prefix with SUDO to see more system level network usage
 alias network.connections='lsof -l -i +L -R -V'
