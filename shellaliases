@@ -188,8 +188,9 @@ function clone() {
     done
     return
   fi
-  if gh repo clone $org/$repo "$projectsHome/$org/$repo"; then
+  if [ -d "$projectsHome/$org/$repo" ] && echo "$projectsHome/$org/$repo already exists" || gh repo clone $org/$repo "$projectsHome/$org/$repo"; then
     cd "$projectsHome/$org/$repo"
+    [ -f .gitmodules ] && git submodule update --init
     fork
   else
     return 1
