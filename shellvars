@@ -22,7 +22,7 @@ fi
 export CB_SUPPORT_HOME="$HOME/Cloudbees/Support"
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export EDITOR=vim
-export GOPATH=/Users/vincent/go
+export GOPATH=/Users/vlatombe/go
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 
 export HELM_S3_REGION=us-east-1

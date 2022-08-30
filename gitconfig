@@ -270,3 +270,5 @@ protocol = https
 	gpgsign = true
 [secrets]
 	providers = opscore security run git-secrets-provider -q
+[pull]
+	rebase = true

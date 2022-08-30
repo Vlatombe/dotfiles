@@ -161,5 +161,54 @@ function screenshot.setpng() {
 	killall SystemUIServer
 }
 
-alias gfd='bosh -n create release --force && bosh -n upload release && bosh -n deploy --recreate'
 alias ecr-login-gauntlet='opscore ecr login --account cloudbees-gauntlet --role infra-ecr-reader'
+
+function clone() {
+  projectsHome=~/projects/github.com
+  orgs=(cloudbees jenkinsci)
+
+  if [ "$#" -ne 1 ]; then
+    echo "Clones a given github repository to $projectsHome/ORG/REPO then changes current directory to it"
+    echo "Usage: clone [ORG/]<REPO> or clone <URL>"
+    echo "When omitting "
+    return 0
+  fi
+  local org
+  local repo
+  if [[ $1 =~ 'https://github.com/([^;]+)/([^;.]+)' || $1 =~ '([^;]+)/([^;.]+)' ]]; then
+    org=$match[1]
+    repo=${match[2]#".git"} # Remove .git suffix if it exists
+  else
+    repo=$1
+    for org ("$orgs[@]") do
+      echo "Trying $org org"
+      if clone $org/$repo; then
+        return
+      fi
+    done
+    return
+  fi
+  if gh repo clone $org/$repo "$projectsHome/$org/$repo"; then
+    cd "$projectsHome/$org/$repo"
+    fork
+  else
+    return 1
+  fi
+}
+
+function link_war() {
+  current=$(basename $(pwd))
+  echo $current
+  if [ "$current" = "je-acceptance-test" ]; then
+    ln -sf ~/projects/github.com/cloudbees/unified-release/products/core-cm/target/*.war jenkins.war
+  fi
+  if [ "$current" = "operations-center-acceptance-test" ]; then
+    ln -sf ~/projects/github.com/cloudbees/unified-release/products/core-cm/target/*.war je.war
+    ln -sf ~/projects/github.com/cloudbees/unified-release/products/core-oc-traditional/target/*.war jenkins-oc.war
+  fi
+}
+
+function cbci_password() {
+  kubectl exec cjoc-0 -- cat /var/jenkins_home/secrets/initialAdminPassword | pbcopy
+  echo "Operations Center password copied to clipboard"
+}

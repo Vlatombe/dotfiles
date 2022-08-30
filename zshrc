@@ -38,30 +38,24 @@ plugins=( \
           helm \
           kops \
           kubectl \
-          kube-ps1\
+          kube-ps1 \
           mvn \
           osx \
           ssh-agent \
           terraform \
           z \
-          zsh-completions \
           )
+# Add completions from homebrew
+if type brew &>/dev/null; then
+    fpath+="$(brew --prefix)/share/zsh/site-functions"
+fi
+# cf. https://github.com/zsh-users/zsh-completions/issues/603
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
 source $ZSH/oh-my-zsh.sh
 
 bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
-
-# Source chtf
-if [[ -f /usr/local/share/chtf/chtf.sh ]]; then
-    source "/usr/local/share/chtf/chtf.sh"
-    chtf 1.0.2
-fi
-
-# Source kubectl switcher
-if [[ -f /usr/local/opt/chk/share/chk/chk.sh ]]; then
-    source "/usr/local/opt/chk/share/chk/chk.sh"
-fi
 
 source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 
