@@ -2,7 +2,12 @@
 # Tool settings
 #########################################################################
 #export GRADLE_OPTS="-Dorg.gradle.daemon=true"
-export MAVEN_OPTS=-Djava.awt.headless=true
+MAVEN_OPTS=-Djava.awt.headless=true
+MAVEN_OPTS="$MAVEN_OPTS --add-opens java.base/java.util=ALL-UNNAMED"
+MAVEN_OPTS="$MAVEN_OPTS --add-opens java.base/java.lang.reflect=ALL-UNNAMED"
+MAVEN_OPTS="$MAVEN_OPTS --add-opens java.base/java.text=ALL-UNNAMED"
+MAVEN_OPTS="$MAVEN_OPTS --add-opens java.desktop/java.awt.font=ALL-UNNAMED"
+export MAVEN_OPTS
 
 # Set the default pager to less
 #export PAGER="less"
@@ -10,7 +15,7 @@ export MAVEN_OPTS=-Djava.awt.headless=true
 #export LESS="-R"
 
 # Copied from gpg-agent-plugin
-local GPG_ENV=$HOME/.gnupg/gpg-agent.env
+GPG_ENV=$HOME/.gnupg/gpg-agent.env
 if [ -f "${GPG_ENV}" ]; then
     . ${GPG_ENV} > /dev/null
     export GPG_AGENT_INFO

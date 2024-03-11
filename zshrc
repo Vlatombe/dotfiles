@@ -8,9 +8,9 @@ export ZSH=$HOME/.dotfiles/oh-my-zsh
 # Set name of the theme to load.
 # Look in $ZSH/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
+# time that oh-my-zsh is loaded.    
 
-export ZSH_THEME="crunch"
+export ZSH_THEME="vlatombe"
 
 # Set to this to use case-sensitive completion
 export CASE_SENSITIVE="false"
@@ -26,8 +26,6 @@ export CASE_SENSITIVE="false"
 
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
 plugins=( \
-          ant \
-          chucknorris \
           compleat \
           dirpersist \
           docker \
@@ -40,7 +38,7 @@ plugins=( \
           kubectl \
           kube-ps1 \
           mvn \
-          osx \
+          rbenv \
           ssh-agent \
           terraform \
           z \
@@ -52,12 +50,16 @@ fi
 # cf. https://github.com/zsh-users/zsh-completions/issues/603
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
+# Remove aliases defined in directories.zsh
+zstyle ':omz:lib:*' aliases no
+#zstyle ':omz:lib:directories' aliases no
+
 source $ZSH/oh-my-zsh.sh
 
 bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
 
-source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 

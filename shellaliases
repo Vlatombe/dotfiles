@@ -23,6 +23,7 @@ alias kx=kubectx
 
 # Maven daemon
 alias m=mvnd
+alias mq='m -Pquick-build clean install'
 
 # Helm
 alias h=helm
@@ -63,11 +64,11 @@ alias pbcopynn='tr -d "\n" | pbcopy'
 alias finder.astext='xattr -wx com.apple.FinderInfo "54 45 58 54 21 52 63 68 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00" $1'
 #alias finder.qltext2='osascript -e tell application "Finder" to set file type of ((POSIX file "$1") as alias) to "TEXT"'
 
-# Git Scribe Commands
-alias gitscribe.gp='git scribe gen pdf && open output/book.pdf'
-alias gitscribe.gh='git scribe gen html && open output/book.html'
-
-alias fork='gh repo fork --remote --clone'
+# Git
+function git-cleanup() {
+  local main_branch; main_branch="$(git rev-parse --abbrev-ref HEAD)"
+  git checkout -q $main_branch && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base $main_branch $branch) && [[ $(git cherry $main_branch $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done
+}
 
 # Show network connections
 # Often useful to prefix with SUDO to see more system level network usage
@@ -84,13 +85,13 @@ alias files.open='sudo fs_usage -e -f filesystem|grep -v CACHE_HIT|grep -v grep|
 alias files.usage.user='sudo fs_usage -e -f filesystem|grep -v CACHE_HIT|grep -v grep|grep Users'
 
 # Directory listings
-# LS_COLORS='no=01;37:fi=01;37:di=07;96:ln=01;36:pi=01;32:so=01;35:do=01;35:bd=01;33:cd=01;33:ex=01;31:mi=00;05;37:or=00;05;37:'
+LS_COLORS='no=01;37:fi=01;37:di=07;96:ln=01;36:pi=01;32:so=01;35:do=01;35:bd=01;33:cd=01;33:ex=01;31:mi=00;05;37:or=00;05;37:'
 # -G Add colors to ls
 # -l Long format
 # -h Short size suffixes (B, K, M, G, P)
 # -p Postpend slash to folders
-alias ls='ls -G -h -p '
-alias ll='ls -l -G -h -p '
+alias ls='ls --color -h -p '
+alias ll='ls -l --color -h -p '
 
 alias incremental.version='gh pr checks | grep incrementals | rev | cut -d '/' -f 2 | rev'
 
@@ -112,9 +113,16 @@ echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COL
 
 # Remap the key above tab from my US internal keyboard to backtick
 function remapUsInternationalKeyboard() {
-  hidutil property --set '{"UserKeyMapping":
+  sudo hidutil property --set '{"UserKeyMapping":
     [{"HIDKeyboardModifierMappingSrc":0x700000064,
       "HIDKeyboardModifierMappingDst":0x700000035}]
+  }'
+}
+
+function remapCancelUsInternationalKeyboard() {
+  sudo hidutil property --set '{"UserKeyMapping":
+    [{"HIDKeyboardModifierMappingSrc":0x700000064,
+      "HIDKeyboardModifierMappingDst":0x700000064}]
   }'
 }
 
@@ -163,53 +171,106 @@ function screenshot.setpng() {
 
 alias ecr-login-gauntlet='opscore ecr login --account cloudbees-gauntlet --role infra-ecr-reader'
 
+function jwtd() {
+    if [[ -x $(command -v jq) ]]; then
+         cat - | jq -R 'split(".") | .[0],.[1] | @base64d | fromjson'
+         echo "Signature: $(echo "${1}" | awk -F'.' '{print $3}')"
+    fi
+}
+
+function login_ecr() {
+  if [ "$#" -lt 1 ]; then
+    echo "Usage: login_ecr <profile> [tool=docker,helm,skopeo...]"
+    return 1
+  fi
+  export AWS_PROFILE=${1:?}
+  export AWS_DEFAULT_REGION=us-east-1
+  tool="${2:-docker}"
+  if [ "$tool" = "helm" ]
+  then
+    toolcmd="helm registry"
+  else
+    toolcmd="$tool"
+  fi
+  aws sso login
+  aws ecr get-login-password | ${=toolcmd} login --username AWS --password-stdin $(aws sts get-caller-identity --query Account --output text).dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com
+}
+
 function clone() {
   projectsHome=~/projects/github.com
   orgs=(cloudbees jenkinsci)
 
   if [ "$#" -ne 1 ]; then
-    echo "Clones a given github repository to $projectsHome/ORG/REPO then changes current directory to it"
-    echo "Usage: clone [ORG/]<REPO> or clone <URL>"
-    echo "When omitting "
-    return 0
+      echo "Clones a given github repository to $projectsHome/ORG/REPO"
+      echo "Usage: clone [ORG/]<REPO> or clone <URL>"
+      return 0
   fi
-  local org
-  local repo
-  if [[ $1 =~ 'https://github.com/([^;]+)/([^;.]+)' || $1 =~ '([^;]+)/([^;.]+)' ]]; then
-    org=$match[1]
-    repo=${match[2]#".git"} # Remove .git suffix if it exists
+  if [[ $1 =~ 'https://github.com/([^;]+)/([^;]+)' || $1 =~ '([^;]+)/([^;]+)' ]]; then
+      org=$match[1]
+      repo=${match[2]%".git"} # Remove .git suffix if it exists
   else
-    repo=$1
-    for org ("$orgs[@]") do
-      echo "Trying $org org"
-      if clone $org/$repo; then
-        return
-      fi
-    done
-    return
+      repo=$1
+      for org in "${orgs[@]}"; do
+          echo "Trying $org org"
+          if clone $org/$repo; then
+              return 0
+          fi
+      done
+      return 0
   fi
-  if [ -d "$projectsHome/$org/$repo" ] && echo "$projectsHome/$org/$repo already exists" || gh repo clone $org/$repo "$projectsHome/$org/$repo"; then
-    cd "$projectsHome/$org/$repo"
-    [ -f .gitmodules ] && git submodule update --init
-    fork
+
+  if ! [ -d "$projectsHome/$org/$repo" ]; then
+      gh repo clone $org/$repo "$projectsHome/$org/$repo" -- --recurse-submodules
   else
+      echo "$projectsHome/$org/$repo already exists; pulling"
+      (cd "$projectsHome/$org/$repo"; git pull)
+  fi
+  if ! [ -d "$projectsHome/$org/$repo" ]; then
     return 1
+  else
+    cd "$projectsHome/$org/$repo"
+  fi
+  [ "$(gh repo set-default --view)" != "$org/$repo" ] && gh repo set-default $org/$repo
+  [ -f .gitmodules ] && git submodule update --init
+  gh repo fork --remote --clone
+}
+
+function link_war_trad() {
+  current=$(basename $(pwd))
+  echo $current
+  URR_HOME="$HOME/projects/github.com/cloudbees/unified-release"
+  if [ "$current" = "je-acceptance-test" ]; then
+    ln -sf $URR_HOME/products/core-cm/target/*.war jenkins.war
+  fi
+  if [ "$current" = "operations-center-acceptance-test" ]; then
+    ln -sf $URR_HOME/products/core-cm/target/*.war je.war
+    ln -sf $URR_HOME/products/core-oc-traditional/target/*.war jenkins-oc.war
   fi
 }
 
-function link_war() {
+function link_war_modern() {
   current=$(basename $(pwd))
   echo $current
+  URR_HOME="$HOME/projects/github.com/cloudbees/unified-release"
   if [ "$current" = "je-acceptance-test" ]; then
-    ln -sf ~/projects/github.com/cloudbees/unified-release/products/core-cm/target/*.war jenkins.war
+    ln -sf $URR_HOME/products/core-mm/target/*.war jenkins.war
   fi
   if [ "$current" = "operations-center-acceptance-test" ]; then
-    ln -sf ~/projects/github.com/cloudbees/unified-release/products/core-cm/target/*.war je.war
-    ln -sf ~/projects/github.com/cloudbees/unified-release/products/core-oc-traditional/target/*.war jenkins-oc.war
+    ln -sf $URR_HOME/products/core-mm/target/*.war je.war
+    ln -sf $URR_HOME/products/core-oc/target/*.war jenkins-oc.war
   fi
 }
 
 function cbci_password() {
   kubectl exec cjoc-0 -- cat /var/jenkins_home/secrets/initialAdminPassword | pbcopy
   echo "Operations Center password copied to clipboard"
+}
+
+function set_up_debug() {
+  local pods; pods=($(kubectl get po -l tenant=mc -o name))
+  local port=5005
+  for pod in $pods; do
+    kubectl port-forward $pod $port:5005 &
+    port=$((port+1))
+  done
 }

@@ -2,7 +2,6 @@
 	name = Vincent Latombe
 	email = vincent@latombe.net
 	username = vlatombe
-	signingkey = 6AA4F86F
 
 [color]
 # ui = true is a superset of all the more specific color options
@@ -39,6 +38,7 @@
 [push]
 	default = current
 	rebase = true
+	recurseSubmodules = no
 
 [alias]
 	amend = commit --amend
@@ -125,7 +125,7 @@
 	configpushnothing = config push.default nothing
 	configpushtracking = config push.default matching
 	configpushcurrent = config push.default current
-	cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+	cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop\\|main' | xargs -n 1 git branch -d"
 
 	# Other alias ideas that don't quite work yet
 	#testnewrepodoesntwork1 = !echo git init $1 && echo cd $1
@@ -271,4 +271,18 @@ protocol = https
 [secrets]
 	providers = opscore security run git-secrets-provider -q
 [pull]
-	rebase = true
+	rebase = false
+[init]
+	defaultBranch = main
+[submodule]
+	recurse = yes
+[maintenance]
+	repo = /Users/vlatombe/projects/github.com/jenkinsci/maven-hpi-plugin
+	repo = /Users/vlatombe/projects/github.com/jenkinsci/jenkins
+	repo = /Users/vlatombe/projects/github.com/cloudbees/unified-release
+	repo = /Users/vlatombe/projects/github.com/jenkinsci/jenkins-test-harness
+	repo = /Users/vlatombe/projects/github.com/cloudbees/cloudbees-replication
+
+[gitbutler]
+	utmostDiscretion = 1
+	signCommits = true
