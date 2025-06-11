@@ -39,6 +39,7 @@ pushd ~
 .emacs_desktop
 .gemrc
 .gitconfig
+.gitattributes
 .gitignore
 .netrc
 .profile

@@ -30,6 +30,7 @@
 	#untracked = cyan
 
 [core]
+    attributesfile = ~/.gitattributes
 	excludesfile = ~/.gitignore
 	quotepath = false
 	autocrlf = input
@@ -180,7 +181,7 @@
 [diff]
 	tool = bc3
 	compactionHeuristic = true
-	algorithm = patience
+	algorithm = histogram
 #	renames = true
 
 [mergetool]
@@ -219,15 +220,6 @@
 	insteadOf = "ghhm://"
 	pushInsteadOf = "ghhm://"
 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-
-[difftool "p4merge"]
-	cmd = \"/Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE\"
-[http]
-	# proxy=http://something
-
 [checkout]
 	# Prefer origin if ambiguity when checking out a remote branch
 	defaultRemote = origin
@@ -239,11 +231,6 @@
 [credential]
   # helper = cache --timeout=300
   helper = osxkeychain
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustExitCode = true
 [filter "media"]
 	required = true
 	clean = git media clean %f
@@ -266,6 +253,13 @@ protocol = https
 	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE
 [mergetool "bc3"]
 	trustExitCode = true
+[merge "git-hires-merge"]
+	name = An interactive merge driver for resolving conflicts on individual or adjacent lines
+	driver = git-hires-merge %O %A %B %L %P
+	recursive = binary
+[merge "mergiraf"]
+    name = mergiraf
+    driver = mergiraf -v merge --git %O %A %B -s %S -x %X -y %Y -p %P
 [commit]
 	gpgsign = true
 [secrets]
@@ -286,3 +280,5 @@ protocol = https
 [gitbutler]
 	utmostDiscretion = 1
 	signCommits = true
+[http]
+	sslBackend = openssl

@@ -23,7 +23,10 @@ alias kx=kubectx
 
 # Maven daemon
 alias m=mvnd
-alias mq='m -Pquick-build clean install'
+alias mqq='m -Pquick-build clean install'
+alias mq='m clean install -DskipTests'
+alias sl='m spotless:apply'
+alias spotless_git_setup='ln -sf ~/.dotfiles/git-hooks/spotless-pre-commit $(git rev-parse --show-toplevel)/.git/hooks/pre-commit'
 
 # Helm
 alias h=helm
@@ -270,7 +273,27 @@ function set_up_debug() {
   local pods; pods=($(kubectl get po -l tenant=mc -o name))
   local port=5005
   for pod in $pods; do
+    debug_clean $port
     kubectl port-forward $pod $port:5005 &
     port=$((port+1))
   done
+}
+
+function set_up_jmx() {
+  local pods; pods=($(kubectl get po -l tenant=mc -o name))
+  local port=4000
+  for pod in $pods; do
+    debug_clean $port
+    kubectl port-forward $pod $port:4000 &
+    port=$((port+1))
+  done
+}
+
+function debug_clean() {
+  local port="${1:?}"
+  old_pid=$(lsof -ti tcp:$port)
+  if [ -n "$old_pid" ]; then
+    echo "Killing $old_pid as it is using port $port"
+    kill -9 $old_pid
+  fi
 }

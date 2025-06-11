@@ -28,6 +28,7 @@ export CASE_SENSITIVE="false"
 plugins=( \
           compleat \
           dirpersist \
+          direnv \
           docker \
           gpg-agent \
           git \
@@ -66,3 +67,8 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/vlatombe/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
