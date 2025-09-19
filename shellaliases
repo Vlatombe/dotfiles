@@ -24,9 +24,20 @@ alias kx=kubectx
 # Maven daemon
 alias m=mvnd
 alias mqq='m -Pquick-build clean install'
-alias mq='m clean install -DskipTests'
+alias mq='m clean install -DskipTests -Dinvoker.skip=true'
 alias sl='m spotless:apply'
-alias spotless_git_setup='ln -sf ~/.dotfiles/git-hooks/spotless-pre-commit $(git rev-parse --show-toplevel)/.git/hooks/pre-commit'
+function spotless_git_setup() {
+  local hooks="$(git rev-parse --git-path hooks)"
+  local pre_commit_hook="$HOME/.dotfiles/git-hooks/spotless-pre-commit"
+  if [ "$(readlink -f "$hooks/pre-commit")" = "$pre_commit_hook" ]; then
+    echo "Spotless pre-commit hook already set up"
+    return
+  else
+    echo "Setting up spotless pre-commit hook"
+    rm -f "$hooks/pre-commit"
+    ln -s "$pre_commit_hook" "$hooks/pre-commit"
+  fi
+}
 
 # Helm
 alias h=helm
@@ -52,8 +63,6 @@ alias timemachine.enablelocalversions='sudo tmutil enablelocal'
 alias timemachine.disablelocalversions='sudo tmutil disablelocal'
 
 alias hexdumpfile='od -h'
-
-alias aws.refresh='opscore iam refresh --account cloudbees-pse --role infra-admin'
 
 alias uuid="uuidgen | tr -d '\n' | tr '[:upper:]' '[:lower:]'"
 
@@ -236,6 +245,7 @@ function clone() {
   [ "$(gh repo set-default --view)" != "$org/$repo" ] && gh repo set-default $org/$repo
   [ -f .gitmodules ] && git submodule update --init
   gh repo fork --remote --clone
+  spotless_git_setup
 }
 
 function link_war_trad() {
@@ -267,6 +277,16 @@ function link_war_modern() {
 function cbci_password() {
   kubectl exec cjoc-0 -- cat /var/jenkins_home/secrets/initialAdminPassword | pbcopy
   echo "Operations Center password copied to clipboard"
+}
+
+function set_up_debug_cjoc() {
+  local pods; pods=($(kubectl get po -l com.cloudbees.cje.tenant=cjoc -o name))
+  local port=4005
+  for pod in $pods; do
+    debug_clean $port
+    kubectl port-forward $pod $port:5005 &
+    port=$((port+1))
+  done
 }
 
 function set_up_debug() {

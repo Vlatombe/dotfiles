@@ -1,1 +1,15 @@
-mvnd spotless:apply
+#!/bin/sh
+set -e
+BLUE='\033[0;34m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+printf "${BLUE}Running ${RED}spotless:check${BLUE} on staged files${NC}\n"
+if stash_ref=$(git stash create --quiet --keep-index "pre-commit-spotless"); then
+    if [ -n "$stash_ref" ]; then
+        # Clear unstaged changes
+        git restore .
+        git stash store $stash_ref --quiet --message "pre-commit-spotless"
+        trap 'git stash pop --quiet' EXIT
+    fi
+fi
+mvnd spotless:check
