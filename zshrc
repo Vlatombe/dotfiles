@@ -27,7 +27,6 @@ export CASE_SENSITIVE="false"
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
 plugins=( \
           compleat \
-          dirpersist \
           direnv \
           docker \
           gpg-agent \
@@ -39,10 +38,9 @@ plugins=( \
           kubectl \
           kube-ps1 \
           mvn \
-          rbenv \
           ssh-agent \
           terraform \
-          z \
+          zoxide \
           )
 # Add completions from homebrew
 if type brew &>/dev/null; then
@@ -72,3 +70,4 @@ fpath=(/Users/vlatombe/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
+

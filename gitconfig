@@ -205,7 +205,7 @@
     pushInsteadOf = "ghgm://"
     # Example: git clone ghgm://hellogitworld
 [url "git@github.com:"]
-	insteadOf = "ghs://"
+	insteadOf = https://github.com/
 	pushInsteadOf = "ghs://"
 [url "git@github.com:vlatombe/"]
 	insteadOf = "ghsm://"

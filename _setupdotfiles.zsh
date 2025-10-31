@@ -46,7 +46,7 @@ symlinkifne .boom
 symlinkifne .boom.conf
 symlinkifne .cloudapp
 symlinkifne .conf
-symlinkifne .config/gh/config.yml
+#symlinkifne .config/gh/config.yml
 symlinkifne .gemrc
 symlinkifne .gitconfig
 symlinkifne .gitattributes

@@ -36,4 +36,6 @@ PATH="/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
 
 PATH="$HOME/.rbenv/bin:$PATH"
 
+PATH="$HOME/.local/bin:$PATH"
+
 export PATH
