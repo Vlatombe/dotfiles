@@ -230,7 +230,7 @@
 	browse = yes
 [credential]
   # helper = cache --timeout=300
-  helper = osxkeychain
+	helper = osxkeychain
 [filter "media"]
 	required = true
 	clean = git media clean %f

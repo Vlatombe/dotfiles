@@ -211,7 +211,7 @@ function login_ecr() {
 
 function clone() {
   projectsHome=~/projects/github.com
-  orgs=(cloudbees jenkinsci)
+  orgs=(calculi-corp cloudbees-io cloudbees jenkinsci)
 
   if [ "$#" -ne 1 ]; then
       echo "Clones a given github repository to $projectsHome/ORG/REPO"

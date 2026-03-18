@@ -33,3 +33,4 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export HELM_S3_REGION=us-east-1
 export AWS_REGION=us-east-1
 export USE_GKE_GCLOUD_AUTH_PLUGIN=true
+export GOPRIVATE=*

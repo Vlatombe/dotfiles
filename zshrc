@@ -62,6 +62,11 @@ source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+autoload -U compinit;
+compinit    
+mkdir -p ~/.zsh_completions/
+fpath+=(~/.zsh_completions/)
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
